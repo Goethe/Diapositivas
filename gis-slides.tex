@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%		 Proyecto Fin de Carrera		   %%%%%%%%
+%%%%%%%%	       Presentación de diapositivas		   %%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[utf8, compress]			{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%        Preámbulo        %%%%%%%%%%%%%%%%%%%%%%%%%
+
+%---------------------------------beamer----------------------------------%
+
+\mode<presentation>
+{
+    \useinnertheme{rounded}
+    \useoutertheme[subsection=false]{miniframes}
+    \useoutertheme{split}
+    \setbeamertemplate{headline}[miniframes theme]{}
+    \setbeamertemplate{footline}{
+	\leavevmode %
+	\hbox{\begin{beamercolorbox} %
+	    [wd		= .6\paperwidth, %
+	     ht		= 2.5ex, %
+	     dp		= 1.125ex, %
+	     leftskip	= .3cm plus1fill, %
+	     rightskip	= .3cm]{author in head/foot} %
+	    \usebeamerfont{author in head/foot}\insertshorttitle
+	  \end{beamercolorbox} %
+	  \begin{beamercolorbox} %
+	    [wd		= .4\paperwidth, %
+	     ht		= 2.5ex, %
+	     dp		= 1.125ex, %
+	     leftskip	= .3cm, %
+	     rightskip	= .3cm plus1fil]{title in head/foot} %
+	    \usebeamerfont{title in head/foot}\insertshortinstitute
+	  \end{beamercolorbox}} %
+    \vskip0pt %
+    }
+    \setbeamertemplate{frametitle}[split theme]{}
+    \usecolortheme{orchid}
+    \usecolortheme{whale}
+}
+
+%--------------------------------\beamer----------------------------------%
+
+\usepackage[spanish]					{babel}
+\usepackage[T1]						{fontenc}
+\usepackage[altbullet, nofontinfo]			{lucidabr}
+
+\title[ENDUS: Sistema de medida y aplicación en palmeras in vivo.]{
+    Desarrollo de sistema de medida por ultrasonidos de baja frecuencia.
+    Aplicación al análisis de palmeras in vivo.
+}
+
+\author[José Ramón Gisbert Valls]{
+    AUTOR: José Ramón Gisbert Valls \and
+    DIRECTOR: Alberto Rodríguez Martínez
+}
+
+\institute[Universidad Miguel Hernández de Elche]{
+    \centering
+    Universidad Miguel Hernández de Elche \\
+    Escuela Politécnica Superior de Elche
+}
+
+\date[Septiembre --- 2011]{
+    \centering
+    Proyecto Fin de Carrera \\
+    Septiembre --- 2011
+}
+
+% Convenios tipográficos: siglas (primera vez), siglas, funciones,
+% argumentos, propiedades, atributos de propiedades, nombres de canal o
+% puerto
+\newcommand\psig[1]{\emph{\MakeTextUppercase{#1}}}
+\newcommand\sig [1]{\textsc{\MakeTextLowercase{#1}}}
+\newcommand\func[1]{\texttt{#1}}
+\newcommand\argu[1]{\texttt{#1}}
+\newcommand\prop[1]{\textsf{#1}}
+\newcommand\atr [1]{\textsf{#1}}
+\newcommand\can [1]{\sig{#1}}
+
+% Palabras predefinidas
+\newcommand\matlab{\sig{MATLAB}}
+\newcommand\kpci  {\sig{KPCI}-3108}
+\newcommand\datx  {\sig{DAT}}
+\newcommand\gui   {\sig{GUI}}
+\newcommand\guide {\sig{GUIDE}}
+\newcommand\pc    {\sig{pc}}
+\newcommand\ram   {\sig{ram}}
+\newcommand\AOUA  {\ensuremath{\mu}\sig{a}741}
+\newcommand\kms   {kmus/s}
+
+%%%%%%%%%%%%%%%%%%%%%%%%         Contenido         %%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\begin{frame}{Índice}
+    \tableofcontents
+\end{frame}
+
+\begin{frame}{Objetivos}
+    \begin{itemize}
+	\item Desarrollar un sistema de medida.
+	\item Realizar pruebas.
+    \end{itemize}
+\end{frame}
+
+\section{Desarrollo del sistema de medida}
+
+\subsection{Capa física}
+
+\section{ENDUS en palmeras in vivo}
+
+
+\end{document}
