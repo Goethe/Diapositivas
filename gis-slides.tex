@@ -12,13 +12,13 @@
 \mode<presentation>
 {
     \useinnertheme{rounded}
-    \useoutertheme[subsection=false]{miniframes}
+    \useoutertheme[subsection=true]{miniframes}
     \useoutertheme{split}
     \setbeamertemplate{headline}[miniframes theme]{}
-    \setbeamertemplate{footline}{
+    \defbeamertemplate{footline}{pfc slides footline}{
 	\leavevmode %
 	\hbox{\begin{beamercolorbox} %
-	    [wd		= .6\paperwidth, %
+	    [wd		= .58\paperwidth, %
 	     ht		= 2.5ex, %
 	     dp		= 1.125ex, %
 	     leftskip	= .3cm plus1fill, %
@@ -26,16 +26,42 @@
 	    \usebeamerfont{author in head/foot}\insertshorttitle
 	  \end{beamercolorbox} %
 	  \begin{beamercolorbox} %
-	    [wd		= .4\paperwidth, %
+	    [wd		= .38\paperwidth, %
 	     ht		= 2.5ex, %
 	     dp		= 1.125ex, %
 	     leftskip	= .3cm, %
 	     rightskip	= .3cm plus1fil]{title in head/foot} %
 	    \usebeamerfont{title in head/foot}\insertshortinstitute
 	  \end{beamercolorbox}} %
-    \vskip0pt %
+    	\vskip0pt %
     }
+    \setbeamertemplate{footline}[pfc slides footline]{}
     \setbeamertemplate{frametitle}[split theme]{}
+    \setbeamertemplate{itemize items}[circle]{}
+    \setbeamertemplate{enumerate items}[circle]{}
+    \setbeamertemplate{sections/subsections in toc}[circle]{}
+    \setbeamertemplate{title page}{
+	\vbox{}
+	\vfill
+	\begin{center}
+	    \begin{beamercolorbox}[sep=8pt,center]{institute}
+		\usebeamerfont{author}\insertinstitute
+	    \end{beamercolorbox}
+	    \inserttitlegraphic
+	    \vskip.4em\par
+	    \begin{beamercolorbox}[sep=8pt,center,rounded=true]{title}
+		\usebeamerfont{title}\inserttitle
+	    \end{beamercolorbox}
+	    \vskip.4em\par
+	    \begin{beamercolorbox}[sep=8pt,center]{date}
+		\usebeamerfont{date}\insertdate
+	    \end{beamercolorbox}
+	    \begin{beamercolorbox}[sep=8pt,right]{author}
+		\usebeamerfont{institute}\insertauthor
+	    \end{beamercolorbox}
+	\end{center}
+	\vfill
+    }
     \usecolortheme{orchid}
     \usecolortheme{whale}
 }
@@ -45,27 +71,44 @@
 \usepackage[spanish]					{babel}
 \usepackage[T1]						{fontenc}
 \usepackage[altbullet, nofontinfo]			{lucidabr}
+\usepackage						{graphicx}
+
+\graphicspath{{./pictures/}{../pictures/}}			% graphics
 
 \title[ENDUS: Sistema de medida y aplicación en palmeras in vivo.]{
-    Desarrollo de sistema de medida por ultrasonidos de baja frecuencia.
+    Desarrollo de sistema de medida por ultrasonidos de baja frecuencia. \\
     Aplicación al análisis de palmeras in vivo.
 }
 
+\newlength{\director}
+\settowidth\director{\usebeamerfont{institute}DIRECTOR: Alberto Rodríguez
+    Martínez}
+
 \author[José Ramón Gisbert Valls]{
-    AUTOR: José Ramón Gisbert Valls \and
-    DIRECTOR: Alberto Rodríguez Martínez
+    \vbox{
+	\makebox[\director][r]{AUTOR: José Ramón Gisbert Valls}
+	\makebox[\director][r]{DIRECTOR: Alberto Rodríguez Martínez}
+    }
 }
 
 \institute[Universidad Miguel Hernández de Elche]{
-    \centering
-    Universidad Miguel Hernández de Elche \\
+    Universidad Miguel Hernández de Elche \medskip\par
     Escuela Politécnica Superior de Elche
 }
 
 \date[Septiembre --- 2011]{
-    \centering
     Proyecto Fin de Carrera \\
     Septiembre --- 2011
+}
+
+\titlegraphic{
+    \includegraphics[bb = 0 524 152 678, clip, height = 1.4cm,
+	keepaspectratio]{logo.pdf}
+}
+
+\logo{
+    \includegraphics[bb = 0 524 152 678, clip, height = .8cm,
+	keepaspectratio]{logo.pdf}
 }
 
 % Convenios tipográficos: siglas (primera vez), siglas, funciones,
@@ -95,9 +138,7 @@
 \begin{document}
 
 
-\begin{frame}
-    \titlepage
-\end{frame}
+\frame[plain]{\titlepage}
 
 \begin{frame}{Índice}
     \tableofcontents
@@ -110,11 +151,80 @@
     \end{itemize}
 \end{frame}
 
+
 \section{Desarrollo del sistema de medida}
 
 \subsection{Capa física}
 
+\begin{frame}{Transductores}
+    \begin{enumerate}
+	\item Esto es enumerado
+	    \begin{itemize}
+		\item Esto es listado
+		\item Listado por segunda vez
+	    \end{itemize}
+	\item Esto vuelve al enumerado
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Acondicionamiento del sensor}
+\end{frame}
+
+\begin{frame}{Acondicionamiento del actuador}
+\end{frame}
+
+
+\subsection{Capa de adquisición}
+
+\begin{frame}{Tarjeta de adquisición}
+\end{frame}
+
+\begin{frame}{Características de la tarjeta}
+\end{frame}
+
+\begin{frame}{Caja de conexiones}
+\end{frame}
+
+
+\subsection{Capa de control y presentación}
+
+\begin{frame}{Objetivos}
+\end{frame}
+
+\begin{frame}{Diseño conceptual}
+\end{frame}
+
+\begin{frame}{Diseño conceptual 2}
+\end{frame}
+
+
 \section{ENDUS en palmeras in vivo}
+
+\subsection{Teoría de los ENDUS}
+
+\begin{frame}{Características de los ultrasonidos}
+\end{frame}
+
+\begin{frame}{Técnicas utilizadas en los ensayos}
+\end{frame}
+
+\begin{frame}{Ruido estructural}
+\end{frame}
+
+
+\subsection{Ensayos realizados}
+
+\begin{frame}{Objetivos de las pruebas}
+\end{frame}
+
+\begin{frame}{Metodología}
+\end{frame}
+
+\begin{frame}{Equipo utilizado}
+\end{frame}
+
+\begin{frame}{Resultados y conclusiones}
+\end{frame}
 
 
 \end{document}

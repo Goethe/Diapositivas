@@ -1,1 +1,13 @@
 *.pdf
+*.aux
+*.cb
+*.cb2
+*.out
+*.swp
+*.toc
+*.log
+*.nav
+*.snm
+*latexmk
+~*
+!logo.pdf
