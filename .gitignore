@@ -8,6 +8,9 @@
 *.log
 *.nav
 *.snm
+*.mps
 *latexmk
 ~*
 !logo.pdf
+!sensor.pdf
+!actuador.pdf

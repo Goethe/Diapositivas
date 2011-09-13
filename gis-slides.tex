@@ -14,6 +14,7 @@
     \useinnertheme{rounded}
     \useoutertheme[subsection=true]{miniframes}
     \useoutertheme{split}
+    \useoutertheme{shadow}
     \setbeamertemplate{headline}[miniframes theme]{}
     \defbeamertemplate{footline}{pfc slides footline}{
 	\leavevmode %
@@ -36,7 +37,7 @@
     	\vskip0pt %
     }
     \setbeamertemplate{footline}[pfc slides footline]{}
-    \setbeamertemplate{frametitle}[split theme]{}
+    \setbeamertemplate{frametitle}[shadow theme]{}
     \setbeamertemplate{itemize items}[circle]{}
     \setbeamertemplate{enumerate items}[circle]{}
     \setbeamertemplate{sections/subsections in toc}[circle]{}
@@ -72,6 +73,7 @@
 \usepackage[T1]						{fontenc}
 \usepackage[altbullet, nofontinfo]			{lucidabr}
 \usepackage						{graphicx}
+\usepackage{array, booktabs}
 
 \graphicspath{{./pictures/}{../pictures/}}			% graphics
 
@@ -146,43 +148,122 @@
 
 \begin{frame}{Objetivos}
     \begin{itemize}
-	\item Desarrollar un sistema de medida.
-	\item Realizar pruebas.
+	\item Desarrollo un sistema de medida por ultrasonidos:
+	    \begin{itemize}
+		\item Valor numérico instantáneo de la señal.
+		\item Media aritmética de las muestras tomadas durante un
+		    periodo de 250 ms.
+		\item Representación gráfica de la señal.
+		\item Representación gráfica del espectro instantáneo de la
+		    señal.
+	    \end{itemize}
+	\item Realización de un estudio preliminar que determine la
+	    existencia de una relación entre los parámetros medidos en un
+	    ENDUS y las condiciones a las que se encuentra expuesto una
+	    palmera.
     \end{itemize}
 \end{frame}
 
 
 \section{Desarrollo del sistema de medida}
 
-\subsection{Capa física}
+\subsection{Subsistema físico}
 
 \begin{frame}{Transductores}
-    \begin{enumerate}
-	\item Esto es enumerado
-	    \begin{itemize}
-		\item Esto es listado
-		\item Listado por segunda vez
-	    \end{itemize}
-	\item Esto vuelve al enumerado
-    \end{enumerate}
+    \begin{table} 
+	\centering
+	\begin{tabular}{l c c}
+	    \toprule
+	    & \multicolumn{2}{c}{Valor} \\
+	    \cmidrule(r){2-3}
+	    \multicolumn{1}{c}{Propiedad} &
+	    \multicolumn{1}{c}{Sensor} &
+	    \multicolumn{1}{c}{Actuador} \\
+	    \midrule
+	    SPL & 110 dB & --- \\
+	    Sensibilidad & --- & -70 dB \\
+	    Potencia máxima & --- & 200
+	    mW (rms) \\
+	    Resistencia & 30 k$\Omega$
+	    & 700 $\Omega$ \\
+	    \bottomrule
+	\end{tabular}
+	\caption{Características de los transductores utilizados.}
+	\label{tab:trasnducers}
+    \end{table}
 \end{frame}
 
 \begin{frame}{Acondicionamiento del sensor}
+    \begin{figure}
+	\centering
+	\includegraphics[scale=.5]{sensor.pdf}
+	\caption{Única etapa amplificadora formada por un amplificador de
+	instrumentación.}
+	\label{fig:sensor}
+    \end{figure}
 \end{frame}
 
 \begin{frame}{Acondicionamiento del actuador}
+    \begin{figure}
+	\centering
+	\includegraphics[scale=.5]{actuador.pdf}
+	\caption{Tres etapas más una etapa de salida. El circuito genera
+	una señal rectangular.}
+	\label{fig:actuator}
+    \end{figure}
 \end{frame}
 
 
-\subsection{Capa de adquisición}
+\subsection{Subsistema de adquisición}
 
-\begin{frame}{Tarjeta de adquisición}
+\begin{frame}{Tarjeta de adquisición digital}
+    \begin{itemize}
+	\item Interfaz PCI (velocidad máxima de transferencia 132 MB/s).
+	\item Subsistema de adquisición de señales analógicas.
+	\item Subsistema generador de señales analógicas (2 canales de
+	    salida analógica).
+	\item Subsistema de entrada/salida digital (4 registros de 8 bits
+	    de propósito general).
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Características de la tarjeta}
+    \begin{itemize}
+	\item Rendimiento máximo de muestreo de 100 kmus/s.
+	\item 16 canales de entrada analógica configurables por software.
+	\item Amplificador de instrumentación implementado internamente en
+	    la tarjeta, ganancia configurable por software.
+	\item Conversor A/D de 16 bits de precisión.
+	\item Cola de muestreo de 256 posiciones.
+	\item Buffer FIFO con capacidad para 2048 muestras.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Caja de conexiones}
+    \begin{itemize}
+	\item Necesidad de una interfaz para la realización de las pruebas.
+	\item Diseño y construcción de una caja de conexiones.
+	    \begin{itemize}
+		\item Se parte de dos cables para la interconexión de
+		    dispositivos con conectores macho mini-D.
+		\item Se retira la cubierta protectora externa y se revelan
+		    los hilos de cobre que forman cada cable
+		\item Prueba e identificación de los terminales con los
+		    cables.
+		\item Realización de un mapa de colores.
+		\item Construcción de la caja.
+	    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Caja de conexiones}
+    \begin{figure}
+	\begin{center}
+	    \includegraphics{caja.jpg}
+	\end{center}
+	\caption{Caja de conexiones}
+	\label{fig:box}
+    \end{figure}
 \end{frame}
 
 
@@ -198,11 +279,22 @@
 \end{frame}
 
 
-\section{ENDUS en palmeras in vivo}
+\section{Realización de los ensayos}
 
 \subsection{Teoría de los ENDUS}
 
 \begin{frame}{Características de los ultrasonidos}
+    \begin{itemize}
+	\item Son perturbaciones mecánicas que viajan a través de un medio
+	    elástico.
+	\item Banda de frecuencia de 20 kHz a 1000 MHz (límite
+	    tecnológico).
+	\item Banda de frecuencia utilizada en ENDUS de 20 kHz a 25 MHz.
+	\item Sus propiedades son invariantes con la frecuencia.
+	\item Cuatro tipos de onda ultrasónica: \emph{longitudinales},
+	    \emph{transversales}, \emph{de superficie} y \emph{ondas de
+	    Lamb}.
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Técnicas utilizadas en los ensayos}
