@@ -256,14 +256,25 @@
     \end{itemize}
 \end{frame}
 
+\newlength{\exterior}
+\settoheight\exterior{\includegraphics[angle=90]{exterior.jpg}}
+
 \begin{frame}{Caja de conexiones}
-    \begin{figure}
-	\begin{center}
-	    \includegraphics{caja.jpg}
-	\end{center}
-	\caption{Caja de conexiones}
-	\label{fig:box}
-    \end{figure}
+    \begin{center}
+	\begin{figure}
+	    \hspace{\stretch{3}}
+	    \begin{minipage}[top][\exterior][c]{.4\textwidth}
+		\includegraphics[angle=90]{exterior.jpg}
+	    \end{minipage}
+	    \hspace{\stretch{.5}}
+	    \begin{minipage}[top][\exterior][c]{.4\textwidth}
+		\includegraphics[angle=90]{interior.jpg}
+	    \end{minipage}
+	    \hspace{\stretch{1}}
+	    \caption{Vistas interna y externa de la caja de conexiones}
+	    \label{fig:connectionbox}
+	\end{figure}
+    \end{center}
 \end{frame}
 
 
