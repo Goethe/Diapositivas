@@ -129,12 +129,12 @@
 }
 
 \titlegraphic{
-    \includegraphics[bb = 0 524 152 678, clip, height = 1.4cm,
+    \includegraphics[viewport = 0 524 152 678, clip, height = 1.4cm,
 	keepaspectratio]{logo.pdf}
 }
 
 \logo{
-    \includegraphics[bb = 0 524 152 678, clip, height = .8cm,
+    \includegraphics[viewport = 0 524 152 678, clip, height = .8cm,
 	keepaspectratio]{logo.pdf}
 }
 
@@ -187,15 +187,36 @@
 
 \section{Desarrollo del sistema de medida}
 
-% \subsection{Subsistema físico}
-% 
-% \begin{frame}{Transductores}
-% \end{frame}
+\subsection{Subsistema físico}
+
+\begin{frame}{Transductores y requisitos de acondicionamiento}
+    \begin{itemize}
+	\item Son transductores activos piezoeléctricos.
+	\item Requisitos de acondicionamiento del actuador:
+	    \begin{itemize}
+		\item Máxima transferencia de potencia.
+		\item Máxima potencia transmitida.
+		\item Señal pulsada.
+		\item Frecuencia de oscilación de 40 kHz.
+	    \end{itemize}
+	\item Requisitos de acondicionamiento del sensor:
+	    \begin{itemize}
+		\item Adaptación de impedancias.
+		\item Ganancia elevada.
+		\item Ancho de banda suficiente para acomodar la señal.
+		\item Supresión de la componente en modo común.
+	    \end{itemize}
+    \end{itemize}
+\end{frame}
 
 
 \subsection{Subsistema de adquisición}
 
 \begin{frame}{Tarjeta de adquisición digital}
+    \alert{figura}
+\end{frame}
+
+\begin{frame}{Características de la tarjeta}
     \begin{itemize}
 	\item Interfaz PCI (velocidad máxima de transferencia 132 MB/s).
 	\item Subsistema de adquisición de señales analógicas.
@@ -248,7 +269,7 @@
 	    \includegraphics[angle=90]{interior.jpg}
 	\end{minipage}
 	\hfill
-	\caption{Vistas interna y externa de la caja de conexiones}
+	\caption{Vistas interna y externa de la caja de conexiones.}
 	\label{fig:connectionbox}
     \end{figure}
 \end{frame}
@@ -270,17 +291,15 @@
 \begin{frame}[fragile]{Proceso de aprendizaje para la utilización del SDK}
     \begin{itemize}
 	\item MATLAB (MATrix LABoratory), kit de desarrollo de software.
-	    \begin{itemize}
-		\item GUIDE (Graphical User Interface Development
-		    Environment), desarrollo de interfaces gráficas.
-		\item DAT (Data Acquisition Toolbox), manejo de
-		    dispositivos de adquisición y generación de señales.
-		    \vspace{\baselineskip}
-		    \begin{lstlisting}
-			handles.ai = analoginput(`keithley');
-			guidata(hObject, handles);
-		    \end{lstlisting}
-	    \end{itemize}
+	\item GUIDE (Graphical User Interface Development Environment),
+	    desarrollo de interfaces gráficas.
+	\item DAT (Data Acquisition Toolbox), manejo de dispositivos de
+	    adquisición y generación de señales.
+	    \vspace{\baselineskip}
+	    \begin{lstlisting}
+		handles.ai = analoginput(`keithley');
+		guidata(hObject, handles);
+	    \end{lstlisting}
     \end{itemize}
 \end{frame}
 
@@ -291,7 +310,7 @@
 	\hspace{1em}
 	\includegraphics[height=25mm, keepaspectratio]{continuo.pdf}
 	\hfill
-	\caption{Modo de representación continuo}
+	\caption{Modo de representación continuo.}
 	\label{fig:continuous}
     \end{figure}
 \end{frame}
@@ -303,8 +322,8 @@
 	\hspace{3em}
 	\includegraphics[height=25mm, keepaspectratio]{disparo.pdf}
 	\hfill
-	\caption{Modo de representación disparado}
-	\label{fig:continuous}
+	\caption{Modo de representación disparado.}
+	\label{fig:triggered}
     \end{figure}
 \end{frame}
 
@@ -321,9 +340,8 @@
 	    tecnológico).
 	\item Banda de frecuencia utilizada en ENDUS de 20 kHz a 25~MHz.
 	\item Sus propiedades son invariantes con la frecuencia.
-	\item Cuatro tipos de onda ultrasónica: \emph{longitudinales},
-	    \emph{transversales}, \emph{de superficie} y \emph{ondas de
-	    Lamb}.
+	\item Cuatro tipos de onda ultrasónica: longitudinales,
+	    transversales, de superficie y ondas de Lamb.
     \end{itemize}
 \end{frame}
 
@@ -358,12 +376,29 @@
     \alert{figura}
 \end{frame}
 
-\begin{frame}{Transductores de impacto}
-    \alert{figura}
+\newlength{\heighteuca}
+\settoheight\heighteuca{\includegraphics{meucalipto.jpg}}
+\newlength{\widtheuca}
+\settowidth\widtheuca{\includegraphics{meucalipto.jpg}}
+\newlength{\widthpalm}
+\settowidth\widthpalm{\includegraphics{mpalmera.jpg}}
+
+\begin{frame}{Metodología}
+    \alert{figura} 
 \end{frame}
 
 \begin{frame}{Metodología}
-    \alert{figura}
+    \begin{figure}
+	\begin{minipage}[top][\heighteuca][c]{\widthpalm}
+	    \includegraphics{mpalmera.jpg}
+	\end{minipage}
+	\hspace{.1em}
+	\begin{minipage}[top][\heighteuca][c]{\widtheuca}
+	    \includegraphics{meucalipto.jpg}
+	\end{minipage}
+	\caption{Medidas tomadas en una palmera y un eucalipto.}
+	\label{fig:measures}
+    \end{figure}
 \end{frame}
 
 
@@ -375,8 +410,16 @@
 \begin{frame}{Prestaciones del sistema}
     \begin{figure}
 	\includegraphics{software.png}
-	\caption{Software de control}
+	\caption{Software de control.}
 	\label{fig:software}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Prestaciones del sistema}
+    \begin{figure}
+	\includegraphics{softwarebis.png}
+	\caption{Función del botón cambio.}
+	\label{fig:softwarebis}
     \end{figure}
 \end{frame}
 
@@ -390,5 +433,47 @@
 	\label{fig:results}
     \end{figure}
 \end{frame}
+
+
+\subsection{Conclusiones y futuras líneas de trabajo}
+
+\begin{frame}{Sistema de medida}
+    \begin{itemize}
+	\item Conclusiones:
+	    \begin{itemize}
+		\item Se ha desarrollado con éxito el sistema de medida.
+		\item Se han implementado todas las prestaciones
+		    requeridas.
+	    \end{itemize}
+	    \vspace{1ex}
+	\item Futuras líneas de trabajo:
+	    \begin{itemize}
+		\item Limitación del sistema en frecuencia.
+		\item Limitación de los transductores en potencia.
+	    \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Estudio preliminar}
+    \begin{itemize}
+	\item Conclusiones:
+	    \begin{itemize}
+		\item Se observa una relación entre los resultados y el
+		    tipo de ejemplar.
+		\item Se observa una relación entre los resultados y el
+		    estado del ejemplar.
+		\item Se observa una relación entre los resultados y la
+		    altura a la que se realiza la medida.
+	    \end{itemize}
+	\item Futuras líneas de trabajo:
+	    \begin{itemize}
+		\item Se recomienda un profundo estudio teórico y la
+		    realización de más ensayos para determinar que relación
+		    existen entre los resultados de un ENDUS y el estado
+		    del ejemplar.
+	    \end{itemize}
+    \end{itemize}
+\end{frame}
+
 
 \end{document}
