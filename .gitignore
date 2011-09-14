@@ -1,4 +1,4 @@
-*.pdf
+gis-slides.pdf
 *.aux
 *.cb
 *.cb2
@@ -8,11 +8,9 @@
 *.log
 *.nav
 *.snm
+*.vrb
 *.mps
 *.mpx
 *latexmk
 ~*
-!logo.pdf
-!sensor.pdf
-!actuador.pdf
 stuff

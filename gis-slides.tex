@@ -73,7 +73,32 @@
 \usepackage[T1]						{fontenc}
 \usepackage[altbullet, nofontinfo]			{lucidabr}
 \usepackage						{graphicx}
-\usepackage{array, booktabs}
+\usepackage{array, booktabs, listings}
+
+
+%--------------------------------listings---------------------------------%
+\lstloadlanguages{Matlab}
+
+\lstset{language      = Matlab,
+	basicstyle    = \ttfamily,
+	keywordstyle  = \sffamily\bfseries,
+	extendedchars = true,
+	breaklines,
+	captionpos    = b,
+	morekeywords  = {addchannel,     analoginput, catch,
+	datadqcallback,	 daqfind,        daqhwinfo,   errordlg,
+	gcbo,            getdata,        guidata,     localDaqCallback,
+	peekdata,        single_channel, start,       stop,
+	strcmpi,	 trigger,        try,         warning}
+}
+
+\lstdefinestyle{displayed}{
+	float            = tpbh,           tabsize     = 5,
+	abovecaptionskip = \bigskipamount, gobble      = 4,
+	xleftmargin      = .082\textwidth, numbers     = left,
+	numberstyle      = \tiny,          numbersep   = 5pt
+}
+%-------------------------------\listings---------------------------------%
 
 \graphicspath{{./pictures/}{../pictures/}}			% graphics
 
@@ -147,71 +172,25 @@
 \end{frame}
 
 \begin{frame}{Objetivos}
-    \begin{itemize}
-	\item Desarrollo un sistema de medida por ultrasonidos:
-	    \begin{itemize}
-		\item Valor numérico instantáneo de la señal.
-		\item Media aritmética de las muestras tomadas durante un
-		    periodo de 250 ms.
-		\item Representación gráfica de la señal.
-		\item Representación gráfica del espectro instantáneo de la
-		    señal.
-	    \end{itemize}
-	\item Realización de un estudio preliminar que determine la
+    \begin{enumerate}
+	\item Desarrollo de un \alert{sistema de medida por ultrasonidos}
+	    que proporcione información visual de la señal de forma
+	    instantánea y que permita extraer una versión digitalizada de
+	    la señal y de su espectro en frecuencias.
+	\item Realización de un \alert{estudio preliminar} que determine la
 	    existencia de una relación entre los parámetros medidos en un
-	    ENDUS y las condiciones a las que se encuentra expuesto una
+	    ENDUS y las condiciones a las que se encuentra expuesta una
 	    palmera.
-    \end{itemize}
+    \end{enumerate}
 \end{frame}
 
 
 \section{Desarrollo del sistema de medida}
 
-\subsection{Subsistema físico}
-
-\begin{frame}{Transductores}
-    \begin{table} 
-	\centering
-	\begin{tabular}{l c c}
-	    \toprule
-	    & \multicolumn{2}{c}{Valor} \\
-	    \cmidrule(r){2-3}
-	    \multicolumn{1}{c}{Propiedad} &
-	    \multicolumn{1}{c}{Sensor} &
-	    \multicolumn{1}{c}{Actuador} \\
-	    \midrule
-	    SPL & 110 dB & --- \\
-	    Sensibilidad & --- & -70 dB \\
-	    Potencia máxima & --- & 200
-	    mW (rms) \\
-	    Resistencia & 30 k$\Omega$
-	    & 700 $\Omega$ \\
-	    \bottomrule
-	\end{tabular}
-	\caption{Características de los transductores utilizados.}
-	\label{tab:trasnducers}
-    \end{table}
-\end{frame}
-
-\begin{frame}{Acondicionamiento del sensor}
-    \begin{figure}
-	\centering
-	\includegraphics[scale=.5]{sensor.pdf}
-	\caption{Única etapa amplificadora formada por un amplificador de
-	instrumentación.}
-	\label{fig:sensor}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Acondicionamiento del actuador}
-    \begin{figure}
-	\centering
-	\includegraphics[scale=.5]{actuador.pdf}
-	\caption{Tres etapas más una etapa de salida. El circuito genera
-	una señal rectangular.}
-	\label{fig:actuator}
-    \end{figure}
-\end{frame}
+% \subsection{Subsistema físico}
+% 
+% \begin{frame}{Transductores}
+% \end{frame}
 
 
 \subsection{Subsistema de adquisición}
@@ -222,12 +201,12 @@
 	\item Subsistema de adquisición de señales analógicas.
 	\item Subsistema generador de señales analógicas (2 canales de
 	    salida analógica).
-	\item Subsistema de entrada/salida digital (4 registros de 8 bits
+	\item Subsistema de entrada/salida digital (4 registros de 8~bits
 	    de propósito general).
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Características de la tarjeta}
+\begin{frame}{Características del subsistema de adquisición}
     \begin{itemize}
 	\item Rendimiento máximo de muestreo de 100 kmus/s.
 	\item 16 canales de entrada analógica configurables por software.
@@ -242,14 +221,11 @@
 \begin{frame}{Caja de conexiones}
     \begin{itemize}
 	\item Necesidad de una interfaz para la realización de las pruebas.
-	\item Diseño y construcción de una caja de conexiones.
+	\item Diseño y construcción de una caja de conexiones:
 	    \begin{itemize}
-		\item Se parte de dos cables para la interconexión de
-		    dispositivos con conectores macho mini-D.
-		\item Se retira la cubierta protectora externa y se revelan
-		    los hilos de cobre que forman cada cable
-		\item Prueba e identificación de los terminales con los
-		    cables.
+		\item Cables terminados en conectores macho mini-D.
+		\item Identificación de los puertos de entrada/salida.
+		\item Localización del cable correspondiente a cada puerto.
 		\item Realización de un mapa de colores.
 		\item Construcción de la caja.
 	    \end{itemize}
@@ -258,39 +234,82 @@
 
 \newlength{\exterior}
 \settoheight\exterior{\includegraphics[angle=90]{exterior.jpg}}
+\newlength{\interior}
+\settowidth\interior{\includegraphics[angle=90]{interior.jpg}}
 
 \begin{frame}{Caja de conexiones}
-    \begin{center}
-	\begin{figure}
-	    \hspace{\stretch{3}}
-	    \begin{minipage}[top][\exterior][c]{.4\textwidth}
-		\includegraphics[angle=90]{exterior.jpg}
-	    \end{minipage}
-	    \hspace{\stretch{.5}}
-	    \begin{minipage}[top][\exterior][c]{.4\textwidth}
-		\includegraphics[angle=90]{interior.jpg}
-	    \end{minipage}
-	    \hspace{\stretch{1}}
-	    \caption{Vistas interna y externa de la caja de conexiones}
-	    \label{fig:connectionbox}
-	\end{figure}
-    \end{center}
+    \begin{figure}
+	\hfill
+	\begin{minipage}[top][\exterior][c]{\interior}
+	    \includegraphics[angle=90]{exterior.jpg}
+	\end{minipage}
+	\hspace{1.5em}
+	\begin{minipage}[top][\exterior][c]{\interior}
+	    \includegraphics[angle=90]{interior.jpg}
+	\end{minipage}
+	\hfill
+	\caption{Vistas interna y externa de la caja de conexiones}
+	\label{fig:connectionbox}
+    \end{figure}
 \end{frame}
 
 
-\subsection{Capa de control y presentación}
+\subsection{Subsistema de control y presentación}
 
-\begin{frame}{Objetivos}
+\begin{frame}{Objetivos de programación}
+    \begin{itemize}
+	\item Valor numérico instantáneo de la señal.
+	\item Media aritmética de las muestras tomadas durante un
+	    periodo de 250 ms.
+	\item Representación gráfica de la señal.
+	\item Representación gráfica del espectro instantáneo de la
+	    señal.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Proceso de aprendizaje para la utilización del SDK}
+    \begin{itemize}
+	\item MATLAB (MATrix LABoratory), kit de desarrollo de software.
+	    \begin{itemize}
+		\item GUIDE (Graphical User Interface Development
+		    Environment), desarrollo de interfaces gráficas.
+		\item DAT (Data Acquisition Toolbox), manejo de
+		    dispositivos de adquisición y generación de señales.
+		    \vspace{\baselineskip}
+		    \begin{lstlisting}
+			handles.ai = analoginput(`keithley');
+			guidata(hObject, handles);
+		    \end{lstlisting}
+	    \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Diseño conceptual}
+    \begin{figure}
+	\hfill
+	\includegraphics[height=25mm, keepaspectratio]{ventanas.pdf}
+	\hspace{1em}
+	\includegraphics[height=25mm, keepaspectratio]{continuo.pdf}
+	\hfill
+	\caption{Modo de representación continuo}
+	\label{fig:continuous}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Diseño conceptual 2}
+\begin{frame}{Diseño conceptual}
+    \begin{figure}
+	\hfill
+	\includegraphics[height=25mm, keepaspectratio]{ventana.pdf}
+	\hspace{3em}
+	\includegraphics[height=25mm, keepaspectratio]{disparo.pdf}
+	\hfill
+	\caption{Modo de representación disparado}
+	\label{fig:continuous}
+    \end{figure}
 \end{frame}
 
 
-\section{Realización de los ensayos}
+\section{Estudio preliminar de la madera de palmera}
 
 \subsection{Teoría de los ENDUS}
 
@@ -300,7 +319,7 @@
 	    elástico.
 	\item Banda de frecuencia de 20 kHz a 1000 MHz (límite
 	    tecnológico).
-	\item Banda de frecuencia utilizada en ENDUS de 20 kHz a 25 MHz.
+	\item Banda de frecuencia utilizada en ENDUS de 20 kHz a 25~MHz.
 	\item Sus propiedades son invariantes con la frecuencia.
 	\item Cuatro tipos de onda ultrasónica: \emph{longitudinales},
 	    \emph{transversales}, \emph{de superficie} y \emph{ondas de
@@ -308,26 +327,68 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Técnicas utilizadas en los ensayos}
+% Particularidades de los ENDUS
+\begin{frame}{Ensayos no destructivos por ultrasonidos}
+    \begin{itemize}
+	\item Campo generado por un transductor cilíndrico, resolución de
+	    un ensayo.
+	\item Técnicas de transmisión y de pulso"=eco.
+	\item Dispersión y ruido estructural o de grano.
+	\item Técnicas de postprocesado destinadas a eliminar el ruido
+	    estructural.
+    \end{itemize}
 \end{frame}
 
-\begin{frame}{Ruido estructural}
+
+\subsection{Realización del estudio}
+
+\begin{frame}{Objetivos del estudio}
+    \begin{itemize}
+	\item Interés en determinar las características del material.
+	\item Pocas referencias que documenten la realización de ENDUS en
+	    madera.
+	\item Peculiaridades de la madera de palmera.
+	\item Disponibilidad de unos transductores de impacto
+	\item \alert{Sentar unas bases para la realización de estudios
+	    posteriores.}
+    \end{itemize}
 \end{frame}
 
+\begin{frame}{Peculiaridad de la madera de palmera}
+    \alert{figura}
+\end{frame}
 
-\subsection{Ensayos realizados}
-
-\begin{frame}{Objetivos de las pruebas}
+\begin{frame}{Transductores de impacto}
+    \alert{figura}
 \end{frame}
 
 \begin{frame}{Metodología}
+    \alert{figura}
 \end{frame}
 
-\begin{frame}{Equipo utilizado}
+
+\section[Resultados y conclusiones]{Resultados, conclusiones y futuras
+    líneas de trabajo}
+
+\subsection{Desarrollo del sistema de medida}
+
+\begin{frame}{Prestaciones del sistema}
+    \begin{figure}
+	\includegraphics{software.png}
+	\caption{Software de control}
+	\label{fig:software}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Resultados y conclusiones}
-\end{frame}
 
+\subsection{Estudio preliminar de la madera de palmera}
+
+\begin{frame}{Resultados de los ensayos}
+    \begin{figure}
+	\includegraphics[height=55mm, keepaspectratio]{resultados.pdf}
+	\caption{Resultados obtenidos en las pruebas}
+	\label{fig:results}
+    \end{figure}
+\end{frame}
 
 \end{document}
