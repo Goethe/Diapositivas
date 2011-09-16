@@ -40,6 +40,8 @@
     \setbeamertemplate{frametitle}[shadow theme]{}
     \setbeamertemplate{itemize items}[circle]{}
     \setbeamertemplate{enumerate items}[circle]{}
+    \setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+    \setbeamerfont{itemize/enumerate subsubbody}{size=\small}
     \setbeamertemplate{sections/subsections in toc}[circle]{}
     \setbeamertemplate{title page}{
 	\vbox{}
@@ -167,44 +169,48 @@
 
 \frame[plain]{\titlepage}
 
-\begin{frame}{Índice}
-    \tableofcontents
-\end{frame}
-
 \begin{frame}{Objetivos}
     \begin{enumerate}
-	\item Desarrollo de un \alert{sistema de medida por ultrasonidos}
-	    que proporcione información visual de la señal de forma
-	    instantánea y que permita extraer una versión digitalizada de
-	    la señal y de su espectro en frecuencias.
-	\item Realización de un \alert{estudio preliminar} que determine la
-	    existencia de una relación entre los parámetros medidos en un
-	    ENDUS y las condiciones a las que se encuentra expuesta una
-	    palmera.
+	\item Desarrollo de un \alert{sistema de medida por
+	    ultrasonidos}.
+	    \begin{itemize}
+		\item Información visual de la señal.
+		\item Señal y espectro digitalizados.
+	    \end{itemize}
+	\item Realización de un estudio preliminar utilizando
+	    \alert{ENDUS en palmeras}.
+	    \begin{itemize}
+		\item Relación entre los parámetros medidos y las propiedades
+		    del material.
+		\item Justificar un estudio posterior.
+	    \end{itemize}
     \end{enumerate}
 \end{frame}
 
 
 \section{Desarrollo del sistema de medida}
 
+\begin{frame}{Índice}
+    \tableofcontents[currentsection]
+\end{frame}
+
+
 \subsection{Subsistema físico}
 
-\begin{frame}{Transductores y requisitos de acondicionamiento}
+\begin{frame}{Transductores y acondicionadores}
     \begin{itemize}
-	\item Son transductores activos piezoeléctricos.
-	\item Requisitos de acondicionamiento del actuador:
+	\item Transductores generadores (efecto piezoeléctrico).
+	\item Acondicionamiento del actuador:
 	    \begin{itemize}
-		\item Máxima transferencia de potencia.
 		\item Máxima potencia transmitida.
-		\item Señal pulsada.
 		\item Frecuencia de oscilación de 40 kHz.
+		\item Señal pulsada.
 	    \end{itemize}
-	\item Requisitos de acondicionamiento del sensor:
+	\item Acondicionamiento del sensor:
 	    \begin{itemize}
 		\item Adaptación de impedancias.
 		\item Ganancia elevada.
-		\item Ancho de banda suficiente para acomodar la señal.
-		\item Supresión de la componente en modo común.
+		\item Ancho de banda.
 	    \end{itemize}
     \end{itemize}
 \end{frame}
@@ -218,117 +224,75 @@
 
 \begin{frame}{Características de la tarjeta}
     \begin{itemize}
-	\item Interfaz PCI (velocidad máxima de transferencia 132 MB/s).
-	\item Subsistema de adquisición de señales analógicas.
-	\item Subsistema generador de señales analógicas (2 canales de
-	    salida analógica).
-	\item Subsistema de entrada/salida digital (4 registros de 8~bits
-	    de propósito general).
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Características del subsistema de adquisición}
-    \begin{itemize}
-	\item Rendimiento máximo de muestreo de 100 kmus/s.
-	\item 16 canales de entrada analógica configurables por software.
-	\item Amplificador de instrumentación implementado internamente en
-	    la tarjeta, ganancia configurable por software.
-	\item Conversor A/D de 16 bits de precisión.
-	\item Cola de muestreo de 256 posiciones.
-	\item Buffer FIFO con capacidad para 2048 muestras.
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Caja de conexiones}
-    \begin{itemize}
-	\item Necesidad de una interfaz para la realización de las pruebas.
-	\item Diseño y construcción de una caja de conexiones:
+	\item Subsistema hardware de adquisición de señales analógicas.
 	    \begin{itemize}
-		\item Cables terminados en conectores macho mini-D.
-		\item Identificación de los puertos de entrada/salida.
-		\item Localización del cable correspondiente a cada puerto.
-		\item Realización de un mapa de colores.
-		\item Construcción de la caja.
+		\item Rendimiento máximo de muestreo de 100 kmus/s.
+		\item 16 canales de entrada analógica configurables por software.
+		\item Amplificador de instrumentación implementado internamente en
+		    la tarjeta, ganancia configurable por software.
+		\item Conversor A/D de 16 bits de precisión.
+		\item Cola de muestreo de 256 posiciones.
+		\item Buffer FIFO con capacidad para 2048 muestras.
 	    \end{itemize}
     \end{itemize}
 \end{frame}
 
-\newlength{\exterior}
-\settoheight\exterior{\includegraphics[angle=90]{exterior.jpg}}
-\newlength{\interior}
-\settowidth\interior{\includegraphics[angle=90]{interior.jpg}}
+\begin{frame}{Caja de conexiones (vista externa)}
+    \includegraphics{exterior.jpg}
+\end{frame}
 
-\begin{frame}{Caja de conexiones}
-    \begin{figure}
-	\hfill
-	\begin{minipage}[top][\exterior][c]{\interior}
-	    \includegraphics[angle=90]{exterior.jpg}
-	\end{minipage}
-	\hspace{1.5em}
-	\begin{minipage}[top][\exterior][c]{\interior}
-	    \includegraphics[angle=90]{interior.jpg}
-	\end{minipage}
-	\hfill
-	\caption{Vistas interna y externa de la caja de conexiones.}
-	\label{fig:connectionbox}
-    \end{figure}
+\begin{frame}{Caja de conexiones (vista interna)}
+    \includegraphics{interior.jpg}
 \end{frame}
 
 
 \subsection{Subsistema de control y presentación}
 
-\begin{frame}{Objetivos de programación}
+\begin{frame}{Programación de la aplicación}
+    \begin{enumerate}
+	\item Determinar los objetivos de programación.
+	    \begin{itemize}
+		\item Valor numérico instantáneo de la señal.
+		\item Media aritmética de las muestras tomadas durante un
+		    periodo de 250 ms.
+		\item Representación gráfica de la señal.
+		\item Representación gráfica del espectro instantáneo de la
+		    señal.
+	    \end{itemize}
+	\item Aprendizaje para la utilización del SDK.
+	\item Observación del modelo.
+	\item Proceso de programación.
+    \end{enumerate}
+\end{frame}
+
+
+\subsection{Conclusiones y futuras líneas de trabajo}
+
+\begin{frame}{Índice}
+    \tableofcontents[currentsubsection]
+\end{frame}
+
+\begin{frame}{Prestaciones del sistema}
+    \centering\movie[showcontrols=true, height=60mm, width=106.67mm]
+    {\includegraphics[height=60mm, width=106.67mm]{proyecto.png}}
+    {proyecto.mov}
+\end{frame}
+
+\begin{frame}{Futuras líneas de trabajo}
     \begin{itemize}
-	\item Valor numérico instantáneo de la señal.
-	\item Media aritmética de las muestras tomadas durante un
-	    periodo de 250 ms.
-	\item Representación gráfica de la señal.
-	\item Representación gráfica del espectro instantáneo de la
-	    señal.
+	\item Limitación del sistema en frecuencia.
+	\item Limitación de los transductores en potencia.
+	\item Añadir nuevas funcionalidades a la aplicación.
     \end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Proceso de aprendizaje para la utilización del SDK}
-    \begin{itemize}
-	\item MATLAB (MATrix LABoratory), kit de desarrollo de software.
-	\item GUIDE (Graphical User Interface Development Environment),
-	    desarrollo de interfaces gráficas.
-	\item DAT (Data Acquisition Toolbox), manejo de dispositivos de
-	    adquisición y generación de señales.
-	    \vspace{\baselineskip}
-	    \begin{lstlisting}
-		handles.ai = analoginput(`keithley');
-		guidata(hObject, handles);
-	    \end{lstlisting}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Diseño conceptual}
-    \begin{figure}
-	\hfill
-	\includegraphics[height=25mm, keepaspectratio]{ventanas.pdf}
-	\hspace{1em}
-	\includegraphics[height=25mm, keepaspectratio]{continuo.pdf}
-	\hfill
-	\caption{Modo de representación continuo.}
-	\label{fig:continuous}
-    \end{figure}
-\end{frame}
-
-\begin{frame}{Diseño conceptual}
-    \begin{figure}
-	\hfill
-	\includegraphics[height=25mm, keepaspectratio]{ventana.pdf}
-	\hspace{3em}
-	\includegraphics[height=25mm, keepaspectratio]{disparo.pdf}
-	\hfill
-	\caption{Modo de representación disparado.}
-	\label{fig:triggered}
-    \end{figure}
 \end{frame}
 
 
 \section{Estudio preliminar de la madera de palmera}
+
+\begin{frame}{Índice}
+    \tableofcontents[currentsection]
+\end{frame}
+
 
 \subsection{Teoría de los ENDUS}
 
@@ -358,7 +322,7 @@
 \end{frame}
 
 
-\subsection{Realización del estudio}
+\subsection{Estudio preliminar de la madera de palmera}
 
 \begin{frame}{Objetivos del estudio}
     \begin{itemize}
@@ -372,59 +336,25 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Peculiaridad de la madera de palmera}
+\begin{frame}{Peculiaridades de la madera de palmera}
     \alert{figura}
 \end{frame}
-
-\newlength{\heighteuca}
-\settoheight\heighteuca{\includegraphics{meucalipto.jpg}}
-\newlength{\widtheuca}
-\settowidth\widtheuca{\includegraphics{meucalipto.jpg}}
-\newlength{\widthpalm}
-\settowidth\widthpalm{\includegraphics{mpalmera.jpg}}
 
 \begin{frame}{Metodología}
     \alert{figura} 
 \end{frame}
 
 \begin{frame}{Metodología}
-    \begin{figure}
-	\begin{minipage}[top][\heighteuca][c]{\widthpalm}
-	    \includegraphics{mpalmera.jpg}
-	\end{minipage}
-	\hspace{.1em}
-	\begin{minipage}[top][\heighteuca][c]{\widtheuca}
-	    \includegraphics{meucalipto.jpg}
-	\end{minipage}
-	\caption{Medidas tomadas en una palmera y un eucalipto.}
-	\label{fig:measures}
-    \end{figure}
+    \includegraphics{mpalmera.jpg}
+    \includegraphics{meucalipto.jpg}
 \end{frame}
 
 
-\section[Resultados y conclusiones]{Resultados, conclusiones y futuras
-    líneas de trabajo}
+\subsection{Conclusiones y futuras líneas de trabajo}
 
-\subsection{Desarrollo del sistema de medida}
-
-\begin{frame}{Prestaciones del sistema}
-    \begin{center}
-	\movie[showcontrols=true, height=60mm, width=106.67mm]
-	    {\includegraphics[height=60mm, width=106.67mm]{proyecto.png}}
-	    {proyecto.mov}
-    \end{center}
+\begin{frame}{Índice}
+    \tableofcontents[currentsubsection]
 \end{frame}
-
-\begin{frame}{Prestaciones del sistema}
-    \begin{figure}
-	\includegraphics{softwarebis.png}
-	\caption{Función del botón cambio.}
-	\label{fig:softwarebis}
-    \end{figure}
-\end{frame}
-
-
-\subsection{Estudio preliminar de la madera de palmera}
 
 \begin{frame}{Resultados de los ensayos}
     \begin{figure}
@@ -434,44 +364,12 @@
     \end{figure}
 \end{frame}
 
-
-\subsection{Conclusiones y futuras líneas de trabajo}
-
-\begin{frame}{Sistema de medida}
+\begin{frame}{Futuras líneas de trabajo}
     \begin{itemize}
-	\item Conclusiones:
-	    \begin{itemize}
-		\item Se ha desarrollado con éxito el sistema de medida.
-		\item Se han implementado todas las prestaciones
-		    requeridas.
-	    \end{itemize}
-	    \vspace{1ex}
-	\item Futuras líneas de trabajo:
-	    \begin{itemize}
-		\item Limitación del sistema en frecuencia.
-		\item Limitación de los transductores en potencia.
-	    \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Estudio preliminar}
-    \begin{itemize}
-	\item Conclusiones:
-	    \begin{itemize}
-		\item Se observa una relación entre los resultados y el
-		    tipo de ejemplar.
-		\item Se observa una relación entre los resultados y el
-		    estado del ejemplar.
-		\item Se observa una relación entre los resultados y la
-		    altura a la que se realiza la medida.
-	    \end{itemize}
-	\item Futuras líneas de trabajo:
-	    \begin{itemize}
-		\item Se recomienda un profundo estudio teórico y la
-		    realización de más ensayos para determinar que relación
-		    existen entre los resultados de un ENDUS y el estado
-		    del ejemplar.
-	    \end{itemize}
+	\item Se recomienda un profundo estudio teórico y la
+	    realización de más ensayos para determinar que relación
+	    existen entre los resultados de un ENDUS y el estado
+	    del ejemplar.
     \end{itemize}
 \end{frame}
 
