@@ -16,7 +16,9 @@ RENOPT = -v 's/-mps//'
 REMOVE = rm
 RMOPTS = -fv
 
-.PHONY: clean, cleanmost, cleanall, force, pictures, verbose
+.PHONY: all, clean, cleanmost, cleanall, force, pictures, verbose
+
+all : $(OBJPDF)
 
 $(OBJPDF) : $(OBJMPS)
 	$(METPDF) $(OBJMPS)
