@@ -1,4 +1,4 @@
-OBJMPS = sensor.mps actuador.mps
+OBJMPS = resultados.mps scattering-eucalipto.mps scattering-palmera.mps
 OBMPDF = $(OBJMPS:.mps=-mps.pdf)
 OBJPDF = $(OBJMPS:.mps=.pdf)
 PNGJPG = caja.jpg interior.jpg
@@ -11,7 +11,7 @@ LMSILE = -silent
 LMFORC = -f -g
 MEPOST = mpost
 METPDF = mptopdf
-RENAME = renombra
+RENAME = rename
 RENOPT = -v 's/-mps//'
 REMOVE = rm
 RMOPTS = -fv
