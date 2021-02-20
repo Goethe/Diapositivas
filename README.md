@@ -3,15 +3,15 @@ Copyright (C)  2009, 2010, 2011  José Ramón Gisbert Valls.
 "Desarrollo de sistema de medida por ultrasonidos de baja frecuencia. Aplicación al análisis de palmeras in vivo."
 ==================================================================================================================
 
-##(Presentación de diapositivas)
+## (Presentación de diapositivas)
 
-##[Universidad Miguel Hernández](http://www.umh.es).
+## [Universidad Miguel Hernández](http://www.umh.es).
 
-###Escuela Politécnica Superior de Elche
+### Escuela Politécnica Superior de Elche
 
-###Ingeniero de Telecomunicación
+### Ingeniero de Telecomunicación
 
-####Proyecto Fin de Carrera: Septiembre — 2011
+#### Proyecto Fin de Carrera: Septiembre — 2011
 
 Autor: José Ramón Gisbert Valls
 
